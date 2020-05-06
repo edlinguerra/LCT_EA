@@ -16,7 +16,7 @@ library(ggplot2)
 # abundancias sumadas en cinco dragas bentónicas obtenidos en cada sitio. El interés era comparar la beta diversidad (el grado de heterogeneidad
 # composicional) para cada una de estas cinco áreas, dispuestas en un gradiente latitudinal. Los datos están en el archivo macrofauna.csv.
 
-macrofauna <- read.csv("C:/Users/Edlin/OneDrive/Documents/UNAM/ENES/Lic. Ciencias de la Tierra/Estadistica_Aplicada/LCT_EA/Beta/macrofauna.csv")
+macrofauna <- read.csv("macrofauna.csv")
 
 # 1.	Calcule la matriz de similitud de Jaccard a partir de estos datos usando la librería vegan.
 library(vegan)
@@ -53,19 +53,25 @@ dispercion<-betadisper(jac, group = macrofauna$Area)
 permutest(dispercion)
 boxplot(dispercion)
 
-# 4.	¿Qué tan similares son las áreas en composición de especies? use la función beta.multi del paquete betapart
-
-library(betapart)
-core<-betapart.core(dat)
-beta.m<-beta.multi(core, index.family = "sorensen")
-beta.m
-
-
-#Alternativamente podemos evaluar qué tan diferentes son las regiones. 
+# 4.	¿Qué tan similares son las áreas en composición de especies? #Alternativamente podemos evaluar qué tan diferentes son las regiones. 
 # Ahora la pregunta no es sobre qué tan dispersas son, si qué tan diferentes son entre ellas
-
 anosim(jac, group = macrofauna$Area)
  
 # 5.	¿Del total de beta diversidad entre las áreas, cuánto corresponde a verdadero
-# recambio de especies, y cuánto a perdida por el gradiente	latitudinal?  
+# recambio de especies, y cuánto a perdida por el gradiente	latitudinal?  use la función beta.multi del paquete betapart
+
+library(betapart)
+core<-betapart.core(dat)
+beta.m<-beta.multi(core, index.family = "jaccard")
+beta.m
+
+# Densidad de especies por sitio
+
+scores.mds$riqueza <- specnumber(dat)
+
+ggplot(scores.mds, aes(x= Area, y = riqueza, color = Area))+
+  geom_boxplot()+
+  theme_classic()
+
+
 

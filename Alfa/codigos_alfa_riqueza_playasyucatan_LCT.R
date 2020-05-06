@@ -2,6 +2,10 @@
 library(vegan)
 library(iNEXT)
 
+#Paquetes para beta diversidad
+library(vegan)
+library(betapart)
+
 #paquetes para optimizar tratamiento de datos
 library(ggplot2) #gráficos
 library(dplyr) #reordenar datos
