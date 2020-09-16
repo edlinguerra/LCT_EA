@@ -1,0 +1,38 @@
+---
+title: "Actividad 1 - Generación de reportes con RStudio Cloud"
+author: "tu nombre y apellido"
+date: "16/9/2020"
+output: word_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Reportes con R Markdown
+
+Este es un documento de R Markdown. Markdown es una paquete para creación de documentos HTML, PDF y MS Word, desde R-Studio, usando para ello sintaxis de formato simple. Para obtener más detalles sobre el uso de R Markdown, consulte <http://rmarkdown.rstudio.com>.
+
+Al hacer clic en el botón **Knit**, se generará un documento que incluye tanto el contenido como la salida de cualquier fragmento de código R incrustado dentro del documento. Puede incrustar un fragmento de código R como este:
+
+```{r}
+#Creación de un vector de 10 valores aleatorios entre 1 y 20
+datos <- runif(10, min = 1, max = 20)
+
+# Estimar promedio
+mean(datos)
+
+# Estimar desviación estándar
+sd(datos)
+```
+
+## Incluir gráficos
+
+Puedes generar un gráfico e insertarlo en el documento, for ejemplo:
+
+```{r, echo=FALSE}
+miNombre <-"nombre y apellido" #reemplaza las palabras nombre y apellido con tus nombre completo 
+hist(datos, main = paste("Histogram of" , miNombre))
+```
+
+Tenga en cuenta que el parámetro `echo = FALSE` se agregó al fragmento de código para evitar la impresión del código R que generó el gráfico.
