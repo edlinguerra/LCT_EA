@@ -1,0 +1,266 @@
+---
+title: 'Estadística Aplicada. Lab1: Aprendiendo a usar R y R-Studio'
+author: "Prof. Edlin Guerra Castro"
+date: "23/09/2020"
+output: pdf_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# R, R-Studio y repositorios
+
+El objetivo principal de este laboratorio es introducirlos a [R](https://www.r-project.org/) y [RStudio](https://rstudio.com/), las herramientas computacionales que utilizaremos a lo largo del semestre para aprender a aplicar los conceptos más importantes de *Modelación estadística*, pero en especial, para aprender a procesar y analizar datos reales.
+
+El programa [R](https://www.r-project.org/), sus versiones actualizadas y todos los paquetes con funciones, asi como otra información relevante se encuentre en los repositorios de R conocidos como **CRAN** (Comprehensive R Archive Network). Los distintos servidores distribuidos en todo el mundo, conforman el CRAN y son conocidos como los **CRAN mirrors** (de espejo). Para descargar los paquetes requieres antes escoger un **CRAN mirror**, y la función que te permite escogerlo de una lista que aparece en la consola es `chooseCRANmirror`. Alternativamente, se pueden descargar paquetes desde otros repositorios, uno muy popular y que estaremos usando en esta asignatura es [GitHub](https://github.com/).
+
+[RStudio](https://rstudio.com/) es un entorno de desarrollo integrado (IDE) para **R**. Incluye una consola, editor de comandos y líneas de programación que admite la ejecución directa de código, así como herramientas para graficar, documentar, registrar el historial de comandos ejecutados, acceder a archivos, y muchas cosas más desde la gestión de un espacio de trabajo. **RStudio** hace que el trabajar con **R** sea más poderoso, y a su vez simple. Para que tengan una idea, esta guía se escribió desde **RStudio**.
+
+Esta práctica la desarrollaremos desde [Rstudio Cloud](https://rstudio.cloud/), una versión en línea de **RStudio** en el que podemos compartir los ejercicios y hacer seguimiento a las soluciones. Esto no los limita que instalen **R** y **RStusio** en sus computadores, por favor háganlo fuera del horario de clase. La idea por ahora es ser eficientes con el uso del tiempo y evitar distraernos con instalaciones. Para instalarlos (**¡despues de clase!**), descarguen los archivos instaladores desde:
+
+- [R](https://www.r-project.org/)
+- [RStudio](https://rstudio.com/)
+
+Lo que harán ahora es:
+
+1. Aceptar la invitación a *Rstudio Cloud* que les envié por correo.
+2. Luego se registrarán con el usuario y contraseña que quieran (nota: pueden usar su cuenta gmail para hacerlo automático).
+3. Inmediatamente visitarán el repositorio de actividades en **R** de esta asignatura en [GitHub](https://github.com/edlinguerra/LCA-ME). Solo hagan click al enlace.
+4. En este punto vamos a clonar el repositorio con HTTPS, para ello copien desde el botón verde **Clone or download**, seleccionando la dirección `https` allí señalada.
+5. Entrarán a su sesión de 
+*Rstudio Cloud* y crearán un proyecto nuevo desde un repositorio (**New Project from Git Repo**). Peguen la dirección y listo. Se iniciará una sesión de **RStudio** con los archivos necesarios.   
+6. Acá un pequeño ejemplo, copien y peguen este código en la consola de Rstudio Cloud:
+
+```{r, eval=FALSE}
+install.packages("gcookbook")
+install.packages("ggplot2")
+library(gcookbook)
+library(grid)
+library(ggplot2)
+
+data("climate")
+p <- ggplot(subset(climate, Source=="Berkeley"), aes(x=Year, y=Anomaly10y)) +
+      geom_line()+
+      annotate("segment", x=1850, xend=1820, y=-.8, yend=-.95, colour="blue", size=2, arrow=arrow()) +
+      annotate("segment", x=1950, xend=1980, y=-.25, yend=-.25, arrow=arrow(ends="both", angle = 90,length=unit(.2,"cm")))+
+      theme_bw()+
+      xlab("Año")+
+      ylab("Anomalías de la temperatura global (°C)")
+p  
+
+```
+
+# Manos a la obra: Objetos, funciones y paquetes 
+
+## Parte 1
+**R** es un lenguaje orientado a objetos, lo que significa que las variables, datos, funciones, resultados, etc., se guardan en la memoria activa del computador en forma de objetos con un nombre específico dado por el usuario en cada sesión. Los objetos se manipulan mediante funciones (que, a su vez, pueden ser tratados como objetos) y operadores. La ventana de la consola es donde se escriben los comandos, después de un indicador o prompt `>` que notifica cuando R está listo para recibir la siguiente instrucción. La tecla `esc` aborta la tentativa de esa línea de comando y da la señal para que aparezca un nuevo prompt. Dos prompts `> >` seguidos invalida esa línea de comando. Si aparece un signo de `+` es que la linea de comando está incompleta y requiere ser completada ante de devolver un resultado. Si aparece un mensaje de *Error* significa que él comando o instrucción no tuvo efecto. Si aparece un *Warning* significa que **R** efectuó la instrucción anterior, pero tuvo algún obstáculo mismo que es descrito inmediatamente. Con las flechas del arriba y abajo del teclado, aparece la linea de comando inmediata anterior y es una manera de no re-escribir dichas líneas cada vez. El signo de número `#` indica un comentario que no será tomado en cuenta hasta que aparezca un nuevo prompt.
+
+Para poder ver los objetos que se encuentran en una sesión activa de **R**, se puede escribir la función de enlistar `ls`, o si estás en **R-Studio**, verifica directamente la pestaña **Environment** en el panel superior derecho.
+```{r, eval=FALSE}
+ls()
+```
+
+El nombre de un objeto se asigna con el operador '<-', '->' o '=', y puede estar hecho de letras, números y puntuación. Nota: Usar el mismo nombre para dos objetos distintos implica perder la asignación del primer objeto
+```{r, eval=FALSE}
+y.y<-10*10
+z.12<-81/9
+unam<-"Universidad Nacional Autonoma de Mexico"
+
+xx<-4
+xx
+xx<-"xx ya no es el mismo"
+xx
+```
+
+Para ver el tipo y longitud de un objeto se pueden usar las funciones `mode`, `class`, `length` o `str`. Úselas con los objetos creados:
+```{r, eval=FALSE}
+#Solo con y.y, úsela con los otros dos objetos
+mode(y.y)
+class(y.y)
+length(y.y)
+str(y.y)
+```
+
+El ';' sirve para separar comandos en una misma linea, sin darle enter, y los textos siempre van entre comillas dobles:
+```{r, eval=FALSE}
+A <- "mandarina"; compar <- TRUE; mode(A)
+mode(compar)
+```
+
+Noten los números entre corchetes del lado izquierdo de la consola marcando el número de elementos que siguen en esa línea antes de llegar a una línea abajo. Luego de ejecutar las línea, ¿puede deducir qué hace `seq`?
+```{r, eval=FALSE}
+muchos<-seq(0,50)
+muchos
+```
+
+**R** es sensible a mayúsculas, pero no a los espacios:
+```{r, eval=FALSE}
+compar
+Compar
+sum    (3+2)
+sum(3+2)
+```
+
+En **R** se usan tres tipos de lementos: números (*numeric*), letras (*character*, siempre entre comillas), lógicos (*logical*). Estos elementos son usados para generar objetos. Los objetos pueden clasificarse como:
+
+A) *Vector*: una columna o una fila de elementos, que pueden ser numéricos, de caracteres de texto, de operadores lógicos, etc. Cuando se trata de una variable categórica, el vector puede ser tratado como un factor, y los niveles del factor corresponden a las categorías de dicha variable. Un vector se crea con la funcion `c`, deguido de paréntesis `()` que incluyen todos los elementos del vector separados por coma.
+```{r, eval=FALSE}
+vect1 <- c(2,4,6,3,7,8,9,2)
+vect1
+
+vect2 <-c("esp", "ing", "por")
+vect2
+
+#Puedes preguntar si un vector tiene elementos de un tipo en particular:
+is.numeric(vect1)
+is.numeric(vect2)
+is.character(vect1)
+is.character(vect2)
+
+#Qué hace esto:
+vect1[5]
+vect2[2]
+
+```
+
+Una de las grandes fortalezas de **R** es que permite el acceso a los elementos de un objeto a través de una selección de subconjuntos de éstos. El *sub-setting* es una manera eficiente y flexible de acceder selectivamente a los elementos de un objeto, y se hace mediante el uso de corchetes `[]`.
+
+
+B) *Matrix*: es un arreglo bidimensional de columnas y renglones, sobre el cual se pueden aplicar operaciones algebraicas. Cada elemento de una matriz puede ser accedido con `[,]`, delante de la coma iría el número de la o las filas, luego de la coma, el número de la o las columnas. La combinación específica de una fila y columna lleva al valor de la celda.
+
+```{r, eval=FALSE}
+#creando una matriz combinando tres vectores
+matr1 <- rbind(c(1,2,3),c(4,5,6),c(7,8,9))
+matr1
+is.factor(matr1)
+is.numeric(matr1)
+
+#creando una matriz con una función
+
+matr2 <- matrix(data = seq(1:9), nrow = 3, ncol = 3, byrow = TRUE)
+
+#Note la diferencia entre matr2 y matr3 si cambiamos el argumento byrow a FALSE
+matr3 <- matrix(data = seq(1:9), nrow = 3, ncol = 3, byrow = FALSE)
+
+#Selección de segunda y tercera columna de matr2
+matr2[,c(2,3)]
+
+#Selección de primera fila de matr2
+matr2[1,]
+
+#Selección el valor de la primera fila y segunda columna de matr2
+matr2[1,2]
+
+
+```
+
+C) *Array*: es un arreglo de dimensiones k>2.
+```{r, eval=FALSE}
+n <- 3
+k <- 2
+j <- 4
+samp <- array(dim = c(n,k,j))
+samp
+
+is.factor(samp)
+is.numeric(samp)
+
+```
+
+Los vectores, matrices y arreglos solo pueden tener elementos del mismo tipo (e.g. numéricos, lógicos, letras)
+
+D) *Dataframe*: es una tabla compuesta de uno o más vectores de la misma longitud, pero con elementos que pueden ser de diferentes tipos. Es el formato ideal para bases de datos, ya que las variables suelen ser de diferente naturaleza (i.e. continuas, nominales, etc.). Se puede acceder a ellas usando la sintaxis de matrices, pero también son el signo `$` para identificar a la columna por su nombre.
+
+```{r, eval=FALSE}
+iris
+data(iris)
+
+#haga click sobre <promise> de iris en su ambiente, luego explore visualmente. ¿Qué es iris?
+
+dim(iris)    #Pide las dimensiones de la tabla iris
+names(iris)  #Pide los nombres de las columnas en iris
+iris[,"Species"] # Selecciona la columna por su nombre
+iris[,5] # Selecciona la columna por su número de columna
+iris$Species     # Selecciona la columna por su asignación en la tabla 'iris'
+
+
+```
+
+E) *List*: Este objeto puede ser visto como un estante, ya que agrupa ordenadamente objetos de diferente tipo (e.g. vectores, arreglos, tablas, otras listas, etc). Se usa mucho para devolver los resultados de una función que se encuentran en la forma de una colección de objetos:
+
+```{r, eval=FALSE}
+
+mi_lista <- vector(mode = "list")
+
+mi_lista[[1]]<-iris
+mi_lista[[2]]<-y.y
+mi_lista[[3]]<-unam
+
+mi_lista
+```
+
+## Parte 2
+
+Las funciones están organizadas en paquetes. El paquete denominado `base` constituye el núcleo de **R** y contiene las funciones básicas del lenguaje. Otro paquete muy importante es `stats` e incluye las funciones estadísticas más importantes y básicas de **R**. Ambos ya vienen preinstalados en **R**. Existen muchos paquetes, a medida que se requiera el uso de alguno específico se irá indicando para que lo descarguen e instalen. Por ahora les adelanto el uso de un set de paquetes agrupados en una familia de paquetes muy usados para ordenar, limpiar, modelar, reproducir, comunicar y graficar datos; este grupo de paquetes se les denomina [tidyverse](https://www.tidyverse.org/). Para instalarlos pueden escribir en la consola:
+
+```{r, eval=FALSE}
+#Para instalar ggplot2 (realizar gráficos de alta calidad)
+install.packages("ggplot2")
+
+#Para depurar y reordenar bases de datos, instala: tidyr
+install.packages("tidyr")
+
+#Para administrar bases de datos: usa dplyr
+install.packages("dplyr")
+
+#Para importar datos desde Excel: readxl
+install.packages("readxl")
+
+#Para análisis en ecología de comunidades usa vegan
+install.packages("vegan")
+
+#para análissi de diversidad usa iNEXT
+install.packages("iNEXT")
+
+#Para instalar todos los paquetes del Tidyverse, incluyendo ggplot2, tidyr, dplyr, etc:
+install.packages("tidyverse")
+```
+
+Alternativamente, puedes usar la ventala *Tools/install packages...*, se desplegará una ventana para que escribas el nombre del paquete a instalar. Los paquetes se instalan una sola vez, siempre que estes en el mismo computador. Para usarlos debes incluirlos en tu sesión de trabajo cada vez que se inicia la sesión. Esto se logra con la función `library`:
+
+```{r, eval=FALSE}
+library("tidyverse")
+```
+
+Antes de usar paquetes, hagamos un análisis exploratorio a los datos *iris*. Antes de copiar el código, busque en la pestaña *Help* qué es *iris*. Efectuamos un gráfico de dispersión entre las variables "largo". Mida el grado de asociación ¿cómo lo haría?
+
+```{r, eval=FALSE}
+plot(iris$Sepal.Length, iris$Petal.Length)
+
+#¿qué hace cor()?
+cor(iris$Sepal.Length, iris$Petal.Length)
+
+```
+
+Usemos el paquete `ggplot2`para mejorar el gráfico:
+
+```{r, eval = FALSE}
+
+pp <- ggplot(data = iris, aes(x = Sepal.Length, y = Petal.Length, colour = Species))+
+      geom_point()
+  
+pp  
+  
+#Mejoremos con capas
+pp +  theme_bw()+
+      xlab("Largo del sépalo (cm)")+
+      ylab("largo del pétalo (cm)")+
+      scale_y_continuous(breaks = seq(1,7,1))+
+      scale_x_continuous(breaks = seq(4,8,1))+
+      annotate(geom = "text", x= 4.3, y = 6.5, parse=TRUE, label= "italic(r) == 0.87")
+      
+#¿cuál gráfico le gustó más? 
+```
+
+Por ahora es suficiente. Salve el proyecto con el nombre "laboratorio 1".

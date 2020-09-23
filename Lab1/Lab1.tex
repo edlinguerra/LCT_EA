@@ -1,0 +1,564 @@
+% Options for packages loaded elsewhere
+\PassOptionsToPackage{unicode}{hyperref}
+\PassOptionsToPackage{hyphens}{url}
+%
+\documentclass[
+]{article}
+\usepackage{lmodern}
+\usepackage{amssymb,amsmath}
+\usepackage{ifxetex,ifluatex}
+\ifnum 0\ifxetex 1\fi\ifluatex 1\fi=0 % if pdftex
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+  \usepackage{textcomp} % provide euro and other symbols
+\else % if luatex or xetex
+  \usepackage{unicode-math}
+  \defaultfontfeatures{Scale=MatchLowercase}
+  \defaultfontfeatures[\rmfamily]{Ligatures=TeX,Scale=1}
+\fi
+% Use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+\IfFileExists{microtype.sty}{% use microtype if available
+  \usepackage[]{microtype}
+  \UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\makeatletter
+\@ifundefined{KOMAClassName}{% if non-KOMA class
+  \IfFileExists{parskip.sty}{%
+    \usepackage{parskip}
+  }{% else
+    \setlength{\parindent}{0pt}
+    \setlength{\parskip}{6pt plus 2pt minus 1pt}}
+}{% if KOMA class
+  \KOMAoptions{parskip=half}}
+\makeatother
+\usepackage{xcolor}
+\IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
+\IfFileExists{bookmark.sty}{\usepackage{bookmark}}{\usepackage{hyperref}}
+\hypersetup{
+  pdftitle={Estadística Aplicada. Lab1: Aprendiendo a usar R y R-Studio},
+  pdfauthor={Prof.~Edlin Guerra Castro},
+  hidelinks,
+  pdfcreator={LaTeX via pandoc}}
+\urlstyle{same} % disable monospaced font for URLs
+\usepackage[margin=1in]{geometry}
+\usepackage{color}
+\usepackage{fancyvrb}
+\newcommand{\VerbBar}{|}
+\newcommand{\VERB}{\Verb[commandchars=\\\{\}]}
+\DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+% Add ',fontsize=\small' for more characters per line
+\usepackage{framed}
+\definecolor{shadecolor}{RGB}{248,248,248}
+\newenvironment{Shaded}{\begin{snugshade}}{\end{snugshade}}
+\newcommand{\AlertTok}[1]{\textcolor[rgb]{0.94,0.16,0.16}{#1}}
+\newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.77,0.63,0.00}{#1}}
+\newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\BuiltInTok}[1]{#1}
+\newcommand{\CharTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\CommentTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{#1}}
+\newcommand{\DecValTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\ErrorTok}[1]{\textcolor[rgb]{0.64,0.00,0.00}{\textbf{#1}}}
+\newcommand{\ExtensionTok}[1]{#1}
+\newcommand{\FloatTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\ImportTok}[1]{#1}
+\newcommand{\InformationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\NormalTok}[1]{#1}
+\newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.81,0.36,0.00}{\textbf{#1}}}
+\newcommand{\OtherTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{#1}}
+\newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\RegionMarkerTok}[1]{#1}
+\newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\StringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\VariableTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\WarningTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\usepackage{graphicx,grffile}
+\makeatletter
+\def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth\else\Gin@nat@width\fi}
+\def\maxheight{\ifdim\Gin@nat@height>\textheight\textheight\else\Gin@nat@height\fi}
+\makeatother
+% Scale images if necessary, so that they will not overflow the page
+% margins by default, and it is still possible to overwrite the defaults
+% using explicit options in \includegraphics[width, height, ...]{}
+\setkeys{Gin}{width=\maxwidth,height=\maxheight,keepaspectratio}
+% Set default figure placement to htbp
+\makeatletter
+\def\fps@figure{htbp}
+\makeatother
+\setlength{\emergencystretch}{3em} % prevent overfull lines
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\setcounter{secnumdepth}{-\maxdimen} % remove section numbering
+
+\title{Estadística Aplicada. Lab1: Aprendiendo a usar R y R-Studio}
+\author{Prof.~Edlin Guerra Castro}
+\date{23/09/2020}
+
+\begin{document}
+\maketitle
+
+\hypertarget{r-r-studio-y-repositorios}{%
+\section{R, R-Studio y repositorios}\label{r-r-studio-y-repositorios}}
+
+El objetivo principal de este laboratorio es introducirlos a
+\href{https://www.r-project.org/}{R} y
+\href{https://rstudio.com/}{RStudio}, las herramientas computacionales
+que utilizaremos a lo largo del semestre para aprender a aplicar los
+conceptos más importantes de \emph{Modelación estadística}, pero en
+especial, para aprender a procesar y analizar datos reales.
+
+El programa \href{https://www.r-project.org/}{R}, sus versiones
+actualizadas y todos los paquetes con funciones, asi como otra
+información relevante se encuentre en los repositorios de R conocidos
+como \textbf{CRAN} (Comprehensive R Archive Network). Los distintos
+servidores distribuidos en todo el mundo, conforman el CRAN y son
+conocidos como los \textbf{CRAN mirrors} (de espejo). Para descargar los
+paquetes requieres antes escoger un \textbf{CRAN mirror}, y la función
+que te permite escogerlo de una lista que aparece en la consola es
+\texttt{chooseCRANmirror}. Alternativamente, se pueden descargar
+paquetes desde otros repositorios, uno muy popular y que estaremos
+usando en esta asignatura es \href{https://github.com/}{GitHub}.
+
+\href{https://rstudio.com/}{RStudio} es un entorno de desarrollo
+integrado (IDE) para \textbf{R}. Incluye una consola, editor de comandos
+y líneas de programación que admite la ejecución directa de código, así
+como herramientas para graficar, documentar, registrar el historial de
+comandos ejecutados, acceder a archivos, y muchas cosas más desde la
+gestión de un espacio de trabajo. \textbf{RStudio} hace que el trabajar
+con \textbf{R} sea más poderoso, y a su vez simple. Para que tengan una
+idea, esta guía se escribió desde \textbf{RStudio}.
+
+Esta práctica la desarrollaremos desde
+\href{https://rstudio.cloud/}{Rstudio Cloud}, una versión en línea de
+\textbf{RStudio} en el que podemos compartir los ejercicios y hacer
+seguimiento a las soluciones. Esto no los limita que instalen \textbf{R}
+y \textbf{RStusio} en sus computadores, por favor háganlo fuera del
+horario de clase. La idea por ahora es ser eficientes con el uso del
+tiempo y evitar distraernos con instalaciones. Para instalarlos
+(\textbf{¡despues de clase!}), descarguen los archivos instaladores
+desde:
+
+\begin{itemize}
+\tightlist
+\item
+  \href{https://www.r-project.org/}{R}
+\item
+  \href{https://rstudio.com/}{RStudio}
+\end{itemize}
+
+Lo que harán ahora es:
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  Aceptar la invitación a \emph{Rstudio Cloud} que les envié por correo.
+\item
+  Luego se registrarán con el usuario y contraseña que quieran (nota:
+  pueden usar su cuenta gmail para hacerlo automático).
+\item
+  Inmediatamente visitarán el repositorio de actividades en \textbf{R}
+  de esta asignatura en
+  \href{https://github.com/edlinguerra/LCA-ME}{GitHub}. Solo hagan click
+  al enlace.
+\item
+  En este punto vamos a clonar el repositorio con HTTPS, para ello
+  copien desde el botón verde \textbf{Clone or download}, seleccionando
+  la dirección \texttt{https} allí señalada.
+\item
+  Entrarán a su sesión de \emph{Rstudio Cloud} y crearán un proyecto
+  nuevo desde un repositorio (\textbf{New Project from Git Repo}).
+  Peguen la dirección y listo. Se iniciará una sesión de
+  \textbf{RStudio} con los archivos necesarios.\\
+\item
+  Acá un pequeño ejemplo, copien y peguen este código en la consola de
+  Rstudio Cloud:
+\end{enumerate}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{install.packages}\NormalTok{(}\StringTok{"gcookbook"}\NormalTok{)}
+\KeywordTok{install.packages}\NormalTok{(}\StringTok{"ggplot2"}\NormalTok{)}
+\KeywordTok{library}\NormalTok{(gcookbook)}
+\KeywordTok{library}\NormalTok{(grid)}
+\KeywordTok{library}\NormalTok{(ggplot2)}
+
+\KeywordTok{data}\NormalTok{(}\StringTok{"climate"}\NormalTok{)}
+\NormalTok{p <-}\StringTok{ }\KeywordTok{ggplot}\NormalTok{(}\KeywordTok{subset}\NormalTok{(climate, Source}\OperatorTok{==}\StringTok{"Berkeley"}\NormalTok{), }\KeywordTok{aes}\NormalTok{(}\DataTypeTok{x=}\NormalTok{Year, }\DataTypeTok{y=}\NormalTok{Anomaly10y)) }\OperatorTok{+}
+\StringTok{      }\KeywordTok{geom_line}\NormalTok{()}\OperatorTok{+}
+\StringTok{      }\KeywordTok{annotate}\NormalTok{(}\StringTok{"segment"}\NormalTok{, }\DataTypeTok{x=}\DecValTok{1850}\NormalTok{, }\DataTypeTok{xend=}\DecValTok{1820}\NormalTok{, }\DataTypeTok{y=}\OperatorTok{-}\NormalTok{.}\DecValTok{8}\NormalTok{, }\DataTypeTok{yend=}\OperatorTok{-}\NormalTok{.}\DecValTok{95}\NormalTok{, }\DataTypeTok{colour=}\StringTok{"blue"}\NormalTok{, }\DataTypeTok{size=}\DecValTok{2}\NormalTok{, }\DataTypeTok{arrow=}\KeywordTok{arrow}\NormalTok{()) }\OperatorTok{+}
+\StringTok{      }\KeywordTok{annotate}\NormalTok{(}\StringTok{"segment"}\NormalTok{, }\DataTypeTok{x=}\DecValTok{1950}\NormalTok{, }\DataTypeTok{xend=}\DecValTok{1980}\NormalTok{, }\DataTypeTok{y=}\OperatorTok{-}\NormalTok{.}\DecValTok{25}\NormalTok{, }\DataTypeTok{yend=}\OperatorTok{-}\NormalTok{.}\DecValTok{25}\NormalTok{, }\DataTypeTok{arrow=}\KeywordTok{arrow}\NormalTok{(}\DataTypeTok{ends=}\StringTok{"both"}\NormalTok{, }\DataTypeTok{angle =} \DecValTok{90}\NormalTok{,}\DataTypeTok{length=}\KeywordTok{unit}\NormalTok{(.}\DecValTok{2}\NormalTok{,}\StringTok{"cm"}\NormalTok{)))}\OperatorTok{+}
+\StringTok{      }\KeywordTok{theme_bw}\NormalTok{()}\OperatorTok{+}
+\StringTok{      }\KeywordTok{xlab}\NormalTok{(}\StringTok{"Año"}\NormalTok{)}\OperatorTok{+}
+\StringTok{      }\KeywordTok{ylab}\NormalTok{(}\StringTok{"Anomalías de la temperatura global (°C)"}\NormalTok{)}
+\NormalTok{p  }
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{manos-a-la-obra-objetos-funciones-y-paquetes}{%
+\section{Manos a la obra: Objetos, funciones y
+paquetes}\label{manos-a-la-obra-objetos-funciones-y-paquetes}}
+
+\hypertarget{parte-1}{%
+\subsection{Parte 1}\label{parte-1}}
+
+\textbf{R} es un lenguaje orientado a objetos, lo que significa que las
+variables, datos, funciones, resultados, etc., se guardan en la memoria
+activa del computador en forma de objetos con un nombre específico dado
+por el usuario en cada sesión. Los objetos se manipulan mediante
+funciones (que, a su vez, pueden ser tratados como objetos) y
+operadores. La ventana de la consola es donde se escriben los comandos,
+después de un indicador o prompt \texttt{\textgreater{}} que notifica
+cuando R está listo para recibir la siguiente instrucción. La tecla
+\texttt{esc} aborta la tentativa de esa línea de comando y da la señal
+para que aparezca un nuevo prompt. Dos prompts
+\texttt{\textgreater{}\ \textgreater{}} seguidos invalida esa línea de
+comando. Si aparece un signo de \texttt{+} es que la linea de comando
+está incompleta y requiere ser completada ante de devolver un resultado.
+Si aparece un mensaje de \emph{Error} significa que él comando o
+instrucción no tuvo efecto. Si aparece un \emph{Warning} significa que
+\textbf{R} efectuó la instrucción anterior, pero tuvo algún obstáculo
+mismo que es descrito inmediatamente. Con las flechas del arriba y abajo
+del teclado, aparece la linea de comando inmediata anterior y es una
+manera de no re-escribir dichas líneas cada vez. El signo de número
+\texttt{\#} indica un comentario que no será tomado en cuenta hasta que
+aparezca un nuevo prompt.
+
+Para poder ver los objetos que se encuentran en una sesión activa de
+\textbf{R}, se puede escribir la función de enlistar \texttt{ls}, o si
+estás en \textbf{R-Studio}, verifica directamente la pestaña
+\textbf{Environment} en el panel superior derecho.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{ls}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+El nombre de un objeto se asigna con el operador `\textless-',
+`-\textgreater{}' o `=', y puede estar hecho de letras, números y
+puntuación. Nota: Usar el mismo nombre para dos objetos distintos
+implica perder la asignación del primer objeto
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{y.y<-}\DecValTok{10}\OperatorTok{*}\DecValTok{10}
+\NormalTok{z}\FloatTok{.12}\NormalTok{<-}\DecValTok{81}\OperatorTok{/}\DecValTok{9}
+\NormalTok{unam<-}\StringTok{"Universidad Nacional Autonoma de Mexico"}
+
+\NormalTok{xx<-}\DecValTok{4}
+\NormalTok{xx}
+\NormalTok{xx<-}\StringTok{"xx ya no es el mismo"}
+\NormalTok{xx}
+\end{Highlighting}
+\end{Shaded}
+
+Para ver el tipo y longitud de un objeto se pueden usar las funciones
+\texttt{mode}, \texttt{class}, \texttt{length} o \texttt{str}. Úselas
+con los objetos creados:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{#Solo con y.y, úsela con los otros dos objetos}
+\KeywordTok{mode}\NormalTok{(y.y)}
+\KeywordTok{class}\NormalTok{(y.y)}
+\KeywordTok{length}\NormalTok{(y.y)}
+\KeywordTok{str}\NormalTok{(y.y)}
+\end{Highlighting}
+\end{Shaded}
+
+El `;' sirve para separar comandos en una misma linea, sin darle enter,
+y los textos siempre van entre comillas dobles:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{A <-}\StringTok{ "mandarina"}\NormalTok{; compar <-}\StringTok{ }\OtherTok{TRUE}\NormalTok{; }\KeywordTok{mode}\NormalTok{(A)}
+\KeywordTok{mode}\NormalTok{(compar)}
+\end{Highlighting}
+\end{Shaded}
+
+Noten los números entre corchetes del lado izquierdo de la consola
+marcando el número de elementos que siguen en esa línea antes de llegar
+a una línea abajo. Luego de ejecutar las línea, ¿puede deducir qué hace
+\texttt{seq}?
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{muchos<-}\KeywordTok{seq}\NormalTok{(}\DecValTok{0}\NormalTok{,}\DecValTok{50}\NormalTok{)}
+\NormalTok{muchos}
+\end{Highlighting}
+\end{Shaded}
+
+\textbf{R} es sensible a mayúsculas, pero no a los espacios:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{compar}
+\NormalTok{Compar}
+\KeywordTok{sum}\NormalTok{    (}\DecValTok{3}\OperatorTok{+}\DecValTok{2}\NormalTok{)}
+\KeywordTok{sum}\NormalTok{(}\DecValTok{3}\OperatorTok{+}\DecValTok{2}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+En \textbf{R} se usan tres tipos de lementos: números (\emph{numeric}),
+letras (\emph{character}, siempre entre comillas), lógicos
+(\emph{logical}). Estos elementos son usados para generar objetos. Los
+objetos pueden clasificarse como:
+
+\begin{enumerate}
+\def\labelenumi{\Alph{enumi})}
+\tightlist
+\item
+  \emph{Vector}: una columna o una fila de elementos, que pueden ser
+  numéricos, de caracteres de texto, de operadores lógicos, etc. Cuando
+  se trata de una variable categórica, el vector puede ser tratado como
+  un factor, y los niveles del factor corresponden a las categorías de
+  dicha variable. Un vector se crea con la funcion \texttt{c}, deguido
+  de paréntesis \texttt{()} que incluyen todos los elementos del vector
+  separados por coma.
+\end{enumerate}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{vect1 <-}\StringTok{ }\KeywordTok{c}\NormalTok{(}\DecValTok{2}\NormalTok{,}\DecValTok{4}\NormalTok{,}\DecValTok{6}\NormalTok{,}\DecValTok{3}\NormalTok{,}\DecValTok{7}\NormalTok{,}\DecValTok{8}\NormalTok{,}\DecValTok{9}\NormalTok{,}\DecValTok{2}\NormalTok{)}
+\NormalTok{vect1}
+
+\NormalTok{vect2 <-}\KeywordTok{c}\NormalTok{(}\StringTok{"esp"}\NormalTok{, }\StringTok{"ing"}\NormalTok{, }\StringTok{"por"}\NormalTok{)}
+\NormalTok{vect2}
+
+\CommentTok{#Puedes preguntar si un vector tiene elementos de un tipo en particular:}
+\KeywordTok{is.numeric}\NormalTok{(vect1)}
+\KeywordTok{is.numeric}\NormalTok{(vect2)}
+\KeywordTok{is.character}\NormalTok{(vect1)}
+\KeywordTok{is.character}\NormalTok{(vect2)}
+
+\CommentTok{#Qué hace esto:}
+\NormalTok{vect1[}\DecValTok{5}\NormalTok{]}
+\NormalTok{vect2[}\DecValTok{2}\NormalTok{]}
+\end{Highlighting}
+\end{Shaded}
+
+Una de las grandes fortalezas de \textbf{R} es que permite el acceso a
+los elementos de un objeto a través de una selección de subconjuntos de
+éstos. El \emph{sub-setting} es una manera eficiente y flexible de
+acceder selectivamente a los elementos de un objeto, y se hace mediante
+el uso de corchetes \texttt{{[}{]}}.
+
+\begin{enumerate}
+\def\labelenumi{\Alph{enumi})}
+\setcounter{enumi}{1}
+\tightlist
+\item
+  \emph{Matrix}: es un arreglo bidimensional de columnas y renglones,
+  sobre el cual se pueden aplicar operaciones algebraicas. Cada elemento
+  de una matriz puede ser accedido con \texttt{{[},{]}}, delante de la
+  coma iría el número de la o las filas, luego de la coma, el número de
+  la o las columnas. La combinación específica de una fila y columna
+  lleva al valor de la celda.
+\end{enumerate}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{#creando una matriz combinando tres vectores}
+\NormalTok{matr1 <-}\StringTok{ }\KeywordTok{rbind}\NormalTok{(}\KeywordTok{c}\NormalTok{(}\DecValTok{1}\NormalTok{,}\DecValTok{2}\NormalTok{,}\DecValTok{3}\NormalTok{),}\KeywordTok{c}\NormalTok{(}\DecValTok{4}\NormalTok{,}\DecValTok{5}\NormalTok{,}\DecValTok{6}\NormalTok{),}\KeywordTok{c}\NormalTok{(}\DecValTok{7}\NormalTok{,}\DecValTok{8}\NormalTok{,}\DecValTok{9}\NormalTok{))}
+\NormalTok{matr1}
+\KeywordTok{is.factor}\NormalTok{(matr1)}
+\KeywordTok{is.numeric}\NormalTok{(matr1)}
+
+\CommentTok{#creando una matriz con una función}
+
+\NormalTok{matr2 <-}\StringTok{ }\KeywordTok{matrix}\NormalTok{(}\DataTypeTok{data =} \KeywordTok{seq}\NormalTok{(}\DecValTok{1}\OperatorTok{:}\DecValTok{9}\NormalTok{), }\DataTypeTok{nrow =} \DecValTok{3}\NormalTok{, }\DataTypeTok{ncol =} \DecValTok{3}\NormalTok{, }\DataTypeTok{byrow =} \OtherTok{TRUE}\NormalTok{)}
+
+\CommentTok{#Note la diferencia entre matr2 y matr3 si cambiamos el argumento byrow a FALSE}
+\NormalTok{matr3 <-}\StringTok{ }\KeywordTok{matrix}\NormalTok{(}\DataTypeTok{data =} \KeywordTok{seq}\NormalTok{(}\DecValTok{1}\OperatorTok{:}\DecValTok{9}\NormalTok{), }\DataTypeTok{nrow =} \DecValTok{3}\NormalTok{, }\DataTypeTok{ncol =} \DecValTok{3}\NormalTok{, }\DataTypeTok{byrow =} \OtherTok{FALSE}\NormalTok{)}
+
+\CommentTok{#Selección de segunda y tercera columna de matr2}
+\NormalTok{matr2[,}\KeywordTok{c}\NormalTok{(}\DecValTok{2}\NormalTok{,}\DecValTok{3}\NormalTok{)]}
+
+\CommentTok{#Selección de primera fila de matr2}
+\NormalTok{matr2[}\DecValTok{1}\NormalTok{,]}
+
+\CommentTok{#Selección el valor de la primera fila y segunda columna de matr2}
+\NormalTok{matr2[}\DecValTok{1}\NormalTok{,}\DecValTok{2}\NormalTok{]}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{enumerate}
+\def\labelenumi{\Alph{enumi})}
+\setcounter{enumi}{2}
+\tightlist
+\item
+  \emph{Array}: es un arreglo de dimensiones k\textgreater2.
+\end{enumerate}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{n <-}\StringTok{ }\DecValTok{3}
+\NormalTok{k <-}\StringTok{ }\DecValTok{2}
+\NormalTok{j <-}\StringTok{ }\DecValTok{4}
+\NormalTok{samp <-}\StringTok{ }\KeywordTok{array}\NormalTok{(}\DataTypeTok{dim =} \KeywordTok{c}\NormalTok{(n,k,j))}
+\NormalTok{samp}
+
+\KeywordTok{is.factor}\NormalTok{(samp)}
+\KeywordTok{is.numeric}\NormalTok{(samp)}
+\end{Highlighting}
+\end{Shaded}
+
+Los vectores, matrices y arreglos solo pueden tener elementos del mismo
+tipo (e.g.~numéricos, lógicos, letras)
+
+\begin{enumerate}
+\def\labelenumi{\Alph{enumi})}
+\setcounter{enumi}{3}
+\tightlist
+\item
+  \emph{Dataframe}: es una tabla compuesta de uno o más vectores de la
+  misma longitud, pero con elementos que pueden ser de diferentes tipos.
+  Es el formato ideal para bases de datos, ya que las variables suelen
+  ser de diferente naturaleza (i.e.~continuas, nominales, etc.). Se
+  puede acceder a ellas usando la sintaxis de matrices, pero también son
+  el signo \texttt{\$} para identificar a la columna por su nombre.
+\end{enumerate}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{iris}
+\KeywordTok{data}\NormalTok{(iris)}
+
+\CommentTok{#haga click sobre <promise> de iris en su ambiente, luego explore visualmente. ¿Qué es iris?}
+
+\KeywordTok{dim}\NormalTok{(iris)    }\CommentTok{#Pide las dimensiones de la tabla iris}
+\KeywordTok{names}\NormalTok{(iris)  }\CommentTok{#Pide los nombres de las columnas en iris}
+\NormalTok{iris[,}\StringTok{"Species"}\NormalTok{] }\CommentTok{# Selecciona la columna por su nombre}
+\NormalTok{iris[,}\DecValTok{5}\NormalTok{] }\CommentTok{# Selecciona la columna por su número de columna}
+\NormalTok{iris}\OperatorTok{$}\NormalTok{Species     }\CommentTok{# Selecciona la columna por su asignación en la tabla 'iris'}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{enumerate}
+\def\labelenumi{\Alph{enumi})}
+\setcounter{enumi}{4}
+\tightlist
+\item
+  \emph{List}: Este objeto puede ser visto como un estante, ya que
+  agrupa ordenadamente objetos de diferente tipo (e.g.~vectores,
+  arreglos, tablas, otras listas, etc). Se usa mucho para devolver los
+  resultados de una función que se encuentran en la forma de una
+  colección de objetos:
+\end{enumerate}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{mi_lista <-}\StringTok{ }\KeywordTok{vector}\NormalTok{(}\DataTypeTok{mode =} \StringTok{"list"}\NormalTok{)}
+
+\NormalTok{mi_lista[[}\DecValTok{1}\NormalTok{]]<-iris}
+\NormalTok{mi_lista[[}\DecValTok{2}\NormalTok{]]<-y.y}
+\NormalTok{mi_lista[[}\DecValTok{3}\NormalTok{]]<-unam}
+
+\NormalTok{mi_lista}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{parte-2}{%
+\subsection{Parte 2}\label{parte-2}}
+
+Las funciones están organizadas en paquetes. El paquete denominado
+\texttt{base} constituye el núcleo de \textbf{R} y contiene las
+funciones básicas del lenguaje. Otro paquete muy importante es
+\texttt{stats} e incluye las funciones estadísticas más importantes y
+básicas de \textbf{R}. Ambos ya vienen preinstalados en \textbf{R}.
+Existen muchos paquetes, a medida que se requiera el uso de alguno
+específico se irá indicando para que lo descarguen e instalen. Por ahora
+les adelanto el uso de un set de paquetes agrupados en una familia de
+paquetes muy usados para ordenar, limpiar, modelar, reproducir,
+comunicar y graficar datos; este grupo de paquetes se les denomina
+\href{https://www.tidyverse.org/}{tidyverse}. Para instalarlos pueden
+escribir en la consola:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{#Para instalar ggplot2 (realizar gráficos de alta calidad)}
+\KeywordTok{install.packages}\NormalTok{(}\StringTok{"ggplot2"}\NormalTok{)}
+
+\CommentTok{#Para depurar y reordenar bases de datos, instala: tidyr}
+\KeywordTok{install.packages}\NormalTok{(}\StringTok{"tidyr"}\NormalTok{)}
+
+\CommentTok{#Para administrar bases de datos: usa dplyr}
+\KeywordTok{install.packages}\NormalTok{(}\StringTok{"dplyr"}\NormalTok{)}
+
+\CommentTok{#Para importar datos desde Excel: readxl}
+\KeywordTok{install.packages}\NormalTok{(}\StringTok{"readxl"}\NormalTok{)}
+
+\CommentTok{#Para análisis en ecología de comunidades usa vegan}
+\KeywordTok{install.packages}\NormalTok{(}\StringTok{"vegan"}\NormalTok{)}
+
+\CommentTok{#para análissi de diversidad usa iNEXT}
+\KeywordTok{install.packages}\NormalTok{(}\StringTok{"iNEXT"}\NormalTok{)}
+
+\CommentTok{#Para instalar todos los paquetes del Tidyverse, incluyendo ggplot2, tidyr, dplyr, etc:}
+\KeywordTok{install.packages}\NormalTok{(}\StringTok{"tidyverse"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+Alternativamente, puedes usar la ventala \emph{Tools/install
+packages\ldots{}}, se desplegará una ventana para que escribas el nombre
+del paquete a instalar. Los paquetes se instalan una sola vez, siempre
+que estes en el mismo computador. Para usarlos debes incluirlos en tu
+sesión de trabajo cada vez que se inicia la sesión. Esto se logra con la
+función \texttt{library}:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{library}\NormalTok{(}\StringTok{"tidyverse"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+Antes de usar paquetes, hagamos un análisis exploratorio a los datos
+\emph{iris}. Antes de copiar el código, busque en la pestaña \emph{Help}
+qué es \emph{iris}. Efectuamos un gráfico de dispersión entre las
+variables ``largo''. Mida el grado de asociación ¿cómo lo haría?
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{plot}\NormalTok{(iris}\OperatorTok{$}\NormalTok{Sepal.Length, iris}\OperatorTok{$}\NormalTok{Petal.Length)}
+
+\CommentTok{#¿qué hace cor()?}
+\KeywordTok{cor}\NormalTok{(iris}\OperatorTok{$}\NormalTok{Sepal.Length, iris}\OperatorTok{$}\NormalTok{Petal.Length)}
+\end{Highlighting}
+\end{Shaded}
+
+Usemos el paquete \texttt{ggplot2}para mejorar el gráfico:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{pp <-}\StringTok{ }\KeywordTok{ggplot}\NormalTok{(}\DataTypeTok{data =}\NormalTok{ iris, }\KeywordTok{aes}\NormalTok{(}\DataTypeTok{x =}\NormalTok{ Sepal.Length, }\DataTypeTok{y =}\NormalTok{ Petal.Length, }\DataTypeTok{colour =}\NormalTok{ Species))}\OperatorTok{+}
+\StringTok{      }\KeywordTok{geom_point}\NormalTok{()}
+  
+\NormalTok{pp  }
+  
+\CommentTok{#Mejoremos con capas}
+\NormalTok{pp }\OperatorTok{+}\StringTok{  }\KeywordTok{theme_bw}\NormalTok{()}\OperatorTok{+}
+\StringTok{      }\KeywordTok{xlab}\NormalTok{(}\StringTok{"Largo del sépalo (cm)"}\NormalTok{)}\OperatorTok{+}
+\StringTok{      }\KeywordTok{ylab}\NormalTok{(}\StringTok{"largo del pétalo (cm)"}\NormalTok{)}\OperatorTok{+}
+\StringTok{      }\KeywordTok{scale_y_continuous}\NormalTok{(}\DataTypeTok{breaks =} \KeywordTok{seq}\NormalTok{(}\DecValTok{1}\NormalTok{,}\DecValTok{7}\NormalTok{,}\DecValTok{1}\NormalTok{))}\OperatorTok{+}
+\StringTok{      }\KeywordTok{scale_x_continuous}\NormalTok{(}\DataTypeTok{breaks =} \KeywordTok{seq}\NormalTok{(}\DecValTok{4}\NormalTok{,}\DecValTok{8}\NormalTok{,}\DecValTok{1}\NormalTok{))}\OperatorTok{+}
+\StringTok{      }\KeywordTok{annotate}\NormalTok{(}\DataTypeTok{geom =} \StringTok{"text"}\NormalTok{, }\DataTypeTok{x=} \FloatTok{4.3}\NormalTok{, }\DataTypeTok{y =} \FloatTok{6.5}\NormalTok{, }\DataTypeTok{parse=}\OtherTok{TRUE}\NormalTok{, }\DataTypeTok{label=} \StringTok{"italic(r) == 0.87"}\NormalTok{)}
+      
+\CommentTok{#¿cuál gráfico le gustó más? }
+\end{Highlighting}
+\end{Shaded}
+
+Por ahora es suficiente. Salve el proyecto con el nombre ``laboratorio
+1''.
+
+\end{document}
