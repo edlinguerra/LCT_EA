@@ -162,38 +162,47 @@ Lo que harán ahora es:
 \def\labelenumi{\arabic{enumi}.}
 \tightlist
 \item
-  Aceptar la invitación a \emph{Rstudio Cloud} que les envié por correo.
+  Aceptar la invitación al espacio de trabajo en \emph{Rstudio Cloud}
+  que les llegó por correo.
 \item
-  Luego se registrarán con el usuario y contraseña que quieran (nota:
-  pueden usar su cuenta gmail para hacerlo automático).
+  Luego se registrarán con el usuario y contraseña que generaron
 \item
-  Inmediatamente visitarán el repositorio de actividades en \textbf{R}
-  de esta asignatura en
-  \href{https://github.com/edlinguerra/LCA-ME}{GitHub}. Solo hagan click
-  al enlace.
+  Al ingresar notarán el espacio de trabajo de nombre \emph{LCT-AE}.
+  Entrarán a ese espacio de trabajo y harán clic sobre la tarea asignata
+  de nombre \emph{Laboratorio 1}.
 \item
-  En este punto vamos a clonar el repositorio con HTTPS, para ello
-  copien desde el botón verde \textbf{Clone or download}, seleccionando
-  la dirección \texttt{https} allí señalada.
+  Una vez que se cargue la interface de \emph{Rstudio}, generen un
+  archivo de códigos vacío, siguiendo el símbolo de hoja en blanco y
+  cruz verde justo debajo del menú \textbf{File}, es la primera opción.
+  Un atajo para crearlo es con las teclas \textbf{Ctrl+Shift+N}
 \item
-  Entrarán a su sesión de \emph{Rstudio Cloud} y crearán un proyecto
-  nuevo desde un repositorio (\textbf{New Project from Git Repo}).
-  Peguen la dirección y listo. Se iniciará una sesión de
-  \textbf{RStudio} con los archivos necesarios.\\
+  Este archivo vacío es un editor de texto inteligente, que reconoce
+  ciertos caracteres y palabras para autocompletar los comandos. Ese
+  espacio será su borrador de comandos y notas. En este archivo irá
+  pegando y ejecutando todos los códigos que a continuación se explican.
 \item
-  Acá un pequeño ejemplo, copien y peguen este código en la consola de
-  Rstudio Cloud:
+  Acá un pequeño ejemplo, copien y peguen todo le código del recuadro de
+  abajo en su editor de comandos. Luego, coleque el cursor sobre al
+  inicio de la primera linea de comando y presionen el botón
+  \textbf{Run} en la esquina superior derecha de su achivo vación;
+  alternativamente, presione \textbf{Ctrl+ENTER}. ¿qué ocurrió? haga
+  esto para las primeras seis líneas de comando. Cuando llegue a
+  \textbf{p \textless- ggplot\ldots{}} selecciones todas las líneas
+  faltantes del código y presione Run o \textbf{Ctrl+ENTER}. ¿Qué
+  ocurrió?
 \end{enumerate}
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\KeywordTok{install.packages}\NormalTok{(}\StringTok{"gcookbook"}\NormalTok{)}
-\KeywordTok{install.packages}\NormalTok{(}\StringTok{"ggplot2"}\NormalTok{)}
-\KeywordTok{library}\NormalTok{(gcookbook)}
-\KeywordTok{library}\NormalTok{(grid)}
-\KeywordTok{library}\NormalTok{(ggplot2)}
+\KeywordTok{install.packages}\NormalTok{(}\StringTok{"gcookbook"}\NormalTok{) }\CommentTok{#instalación del paquete tutorial de gráficos gcookbook}
+\KeywordTok{install.packages}\NormalTok{(}\StringTok{"grid"}\NormalTok{) }\CommentTok{#instalación de paquete gráfico grid}
+\KeywordTok{install.packages}\NormalTok{(}\StringTok{"ggplot2"}\NormalTok{) }\CommentTok{#instalación de paquete gráfico ggplot2}
+\KeywordTok{library}\NormalTok{(gcookbook) }\CommentTok{#cargar paquete gcookbook en la sesión}
+\KeywordTok{library}\NormalTok{(grid) }\CommentTok{#cargar paquete grid en la sesión}
+\KeywordTok{library}\NormalTok{(ggplot2) }\CommentTok{#cargar paquete ggplot2 en la sesión}
 
-\KeywordTok{data}\NormalTok{(}\StringTok{"climate"}\NormalTok{)}
+\KeywordTok{data}\NormalTok{(}\StringTok{"climate"}\NormalTok{) }\CommentTok{#importar base de datos de climas global albergado en el paquete gcookbook }
+
 \NormalTok{p <-}\StringTok{ }\KeywordTok{ggplot}\NormalTok{(}\KeywordTok{subset}\NormalTok{(climate, Source}\OperatorTok{==}\StringTok{"Berkeley"}\NormalTok{), }\KeywordTok{aes}\NormalTok{(}\DataTypeTok{x=}\NormalTok{Year, }\DataTypeTok{y=}\NormalTok{Anomaly10y)) }\OperatorTok{+}
 \StringTok{      }\KeywordTok{geom_line}\NormalTok{()}\OperatorTok{+}
 \StringTok{      }\KeywordTok{annotate}\NormalTok{(}\StringTok{"segment"}\NormalTok{, }\DataTypeTok{x=}\DecValTok{1850}\NormalTok{, }\DataTypeTok{xend=}\DecValTok{1820}\NormalTok{, }\DataTypeTok{y=}\OperatorTok{-}\NormalTok{.}\DecValTok{8}\NormalTok{, }\DataTypeTok{yend=}\OperatorTok{-}\NormalTok{.}\DecValTok{95}\NormalTok{, }\DataTypeTok{colour=}\StringTok{"blue"}\NormalTok{, }\DataTypeTok{size=}\DecValTok{2}\NormalTok{, }\DataTypeTok{arrow=}\KeywordTok{arrow}\NormalTok{()) }\OperatorTok{+}

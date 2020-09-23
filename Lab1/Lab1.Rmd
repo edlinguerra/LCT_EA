@@ -24,22 +24,23 @@ Esta práctica la desarrollaremos desde [Rstudio Cloud](https://rstudio.cloud/),
 
 Lo que harán ahora es:
 
-1. Aceptar la invitación a *Rstudio Cloud* que les envié por correo.
-2. Luego se registrarán con el usuario y contraseña que quieran (nota: pueden usar su cuenta gmail para hacerlo automático).
-3. Inmediatamente visitarán el repositorio de actividades en **R** de esta asignatura en [GitHub](https://github.com/edlinguerra/LCA-ME). Solo hagan click al enlace.
-4. En este punto vamos a clonar el repositorio con HTTPS, para ello copien desde el botón verde **Clone or download**, seleccionando la dirección `https` allí señalada.
-5. Entrarán a su sesión de 
-*Rstudio Cloud* y crearán un proyecto nuevo desde un repositorio (**New Project from Git Repo**). Peguen la dirección y listo. Se iniciará una sesión de **RStudio** con los archivos necesarios.   
-6. Acá un pequeño ejemplo, copien y peguen este código en la consola de Rstudio Cloud:
+1. Aceptar la invitación al espacio de trabajo en *Rstudio Cloud* que les llegó por correo.
+2. Luego se registrarán con el usuario y contraseña que generaron
+3. Al ingresar notarán el espacio de trabajo de nombre *LCT-AE*. Entrarán a ese espacio de trabajo y harán clic sobre la tarea asignata de nombre *Laboratorio 1*.
+4. Una vez que se cargue la interface de *Rstudio*, generen un archivo de códigos vacío, siguiendo el símbolo de hoja en blanco y cruz verde justo debajo del menú **File**, es la primera opción. Un atajo para crearlo es con las teclas **Ctrl+Shift+N**
+5. Este archivo vacío es un editor de texto inteligente, que reconoce ciertos caracteres y palabras para autocompletar los comandos. Ese espacio será su borrador de comandos y notas. En este archivo irá pegando y ejecutando todos los códigos que a continuación se explican.
+6. Acá un pequeño ejemplo, copien y peguen todo le código del recuadro de abajo en su editor de comandos. Luego, coleque el cursor sobre al inicio de la primera linea de comando y presionen el botón **Run** en la esquina superior derecha de su achivo vación; alternativamente, presione **Ctrl+ENTER**. ¿qué ocurrió? haga esto para las primeras seis líneas de comando. Cuando llegue a **p <- ggplot...** selecciones todas las líneas faltantes del código y presione Run o **Ctrl+ENTER**. ¿Qué ocurrió? 
 
 ```{r, eval=FALSE}
-install.packages("gcookbook")
-install.packages("ggplot2")
-library(gcookbook)
-library(grid)
-library(ggplot2)
+install.packages("gcookbook") #instalación del paquete tutorial de gráficos gcookbook
+install.packages("grid") #instalación de paquete gráfico grid
+install.packages("ggplot2") #instalación de paquete gráfico ggplot2
+library(gcookbook) #cargar paquete gcookbook en la sesión
+library(grid) #cargar paquete grid en la sesión
+library(ggplot2) #cargar paquete ggplot2 en la sesión
 
-data("climate")
+data("climate") #importar base de datos de climas global albergado en el paquete gcookbook 
+
 p <- ggplot(subset(climate, Source=="Berkeley"), aes(x=Year, y=Anomaly10y)) +
       geom_line()+
       annotate("segment", x=1850, xend=1820, y=-.8, yend=-.95, colour="blue", size=2, arrow=arrow()) +
@@ -263,4 +264,18 @@ pp +  theme_bw()+
 #¿cuál gráfico le gustó más? 
 ```
 
-Por ahora es suficiente. Salve el proyecto con el nombre "laboratorio 1".
+Llegados a este punto, vamos hacer algo de estadística descriptiva. Calculen promedio, varianza y desviación estandar a cada variable. Usen para ello la función `aggregate` del paquete `stats`. Para entender como usar esta función, busquen el documento de ayuda de esa función, colocando escribiendo `aggregate`en la barra de búsqueda del panel *Help*.
+
+```{r, eval = FALSE}
+
+#La función para calcular promedio es mean, para varianza es var, para desviación estándar es sd
+
+summary(climate)
+
+mean(climate$Anomaly10y, na.rm = T)
+
+climate$Source <- factor(climate$Source)
+
+aggregate(formula = Anomaly10y~Source, data = climate, FUN = mean)
+
+```
