@@ -39,12 +39,14 @@ library(gcookbook) #cargar paquete gcookbook en la sesión
 library(grid) #cargar paquete grid en la sesión
 library(ggplot2) #cargar paquete ggplot2 en la sesión
 
-data("climate") #importar base de datos de climas global albergado en el paquete gcookbook 
+data("climate") #importar datos de clima global del paquete gcookbook 
 
 p <- ggplot(subset(climate, Source=="Berkeley"), aes(x=Year, y=Anomaly10y)) +
       geom_line()+
-      annotate("segment", x=1850, xend=1820, y=-.8, yend=-.95, colour="blue", size=2, arrow=arrow()) +
-      annotate("segment", x=1950, xend=1980, y=-.25, yend=-.25, arrow=arrow(ends="both", angle = 90,length=unit(.2,"cm")))+
+      annotate("segment", x=1850, xend=1820, y=-.8, 
+               yend=-.95, colour="blue", size=2, arrow=arrow()) +
+      annotate("segment", x=1950, xend=1980, y=-.25,
+               yend=-.25, arrow=arrow(ends="both", angle = 90,length=unit(.2,"cm")))+
       theme_bw()+
       xlab("Año")+
       ylab("Anomalías de la temperatura global (°C)")
@@ -177,7 +179,8 @@ D) *Dataframe*: es una tabla compuesta de uno o más vectores de la misma longit
 iris
 data(iris)
 
-#haga click sobre <promise> de iris en su ambiente, luego explore visualmente. ¿Qué es iris?
+#haga click sobre <promise> de iris en su ambiente, luego explore visualmente. 
+# ¿Qué es iris?
 
 dim(iris)    #Pide las dimensiones de la tabla iris
 names(iris)  #Pide los nombres de las columnas en iris
@@ -264,18 +267,55 @@ pp +  theme_bw()+
 #¿cuál gráfico le gustó más? 
 ```
 
-Llegados a este punto, vamos hacer algo de estadística descriptiva. Calculen promedio, varianza y desviación estandar a cada variable. Usen para ello la función `aggregate` del paquete `stats`. Para entender como usar esta función, busquen el documento de ayuda de esa función, colocando escribiendo `aggregate`en la barra de búsqueda del panel *Help*.
+Llegados a este punto, vamos hacer algo de estadística descriptiva. Esta es la parte que deberán entregar como tarea. Calculen promedio, varianza y desviación estandar a la variable largo del sepalo (**Sepal.Length**). Usen para ello los códigos suminitrados y responda las preguntas en el cuadro. 
 
 ```{r, eval = FALSE}
+## PRREGUNTAS
 
-#La función para calcular promedio es mean, para varianza es var, para desviación estándar es sd
+# 1. Copia el comando que sigue. ¿Qué se calculó?
+xx<-iris$Sepal.Length
+sum(xx)/length(xx)
 
-summary(climate)
+# 2. Busca y aplica una función que ejecute la linea de comando anterior. 
+# (PISTA: escribe '?mean' en la cónsola y enter para ampliar tu búsqueda)
 
-mean(climate$Anomaly10y, na.rm = T)
+# 3. Calcula la mediana de usando la función correspondiente.
 
-climate$Source <- factor(climate$Source)
+# 4. Calcula la varianza y desviación estándar de usando el comando 'var'
 
-aggregate(formula = Anomaly10y~Source, data = climate, FUN = mean)
+# 5. ¿Cuál es la diferencia entre estas dos fórmulas? ¿Representan lo mismo?
+
+sum((xx-mean(xx))^2)/length(xx)
+sum((xx-mean(xx))^2)/(length(xx)-1)
+
+# 6. Con base en el valor de la varianza y usando operadores aritméticos, 
+# calcula la desviación estándar de ambas muestras.
+# Confirma tu resultado usando la función en R correspondiente.
+
+
+# 7. Todas estas estimaciones ignoran las posibles diferencias en el largo del sépalo
+# entre las especies. ¿Qué le dice este gráfico?
+boxplot(Sepal.Length~Species, data = iris)
+
+
+# 8. Calcule el promedio para cada especie usando la función aggregate.
+# (PISTA: escribe '?aggregate' en la cónsola y enter para # ver cómo se usa la función;
+# de las cuatro formas de uso, recomiendo el modo S3 para fórmulas).
+# Nombre al resultado como prom.sep
+
+
+# 9. Calcule la desviación estándar para cada especie usando la función aggregate. 
+# Nombre al resultado con el nombre sd.sep
+
+# 10. Combine ambos resultados en una data frame usando el siguiente código e interprete
+# la tabla con base en el gráfico previamente generado.
+
+resultado <- data.frame("Especies" = prom.sep$Species,
+                        "Promedio" = prom.sep$Sepal.Length,
+                        "Desv. Estandar" = sd.sep$Sepal.Length)
+
 
 ```
+
+
+Recuerde cargar las respuestas a estas preguntas en el formato de Google Doc generado en el Google Classroom.
