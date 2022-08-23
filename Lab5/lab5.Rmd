@@ -1,7 +1,7 @@
 ---
 title: 'Estadística Aplicada. Lab5: Comparaciones múltiples y ANOVAs complejos'
 author: "Edlin Guerra Castro"
-date: "30/10/2020"
+date: "07/10/2021"
 output:
   pdf_document: default
   html_document: default

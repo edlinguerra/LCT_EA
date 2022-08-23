@@ -6,7 +6,6 @@
 # 1. Importa los datos en R, y verifica sus características y estructura. ¿Cuántas dimensiones tiene la
 #tabla que importaste? ¿En qué difiere esta de aquellas usada en las pruebas de *t* para dos muestras? 
 
-
 # 
 # 
 # 2. Lee el problema con atención y responde a las siguientes preguntas:
@@ -70,7 +69,8 @@ datos$localidades<-as.factor(datos$localidades)
 is.factor(datos$localidades)
 # 
 #Modelo lineal
-lm(DBO ~ 0 + localidades, data = datos)
+mod<-lm(DBO ~ 0 + localidades, data = datos)
+mod2<-lm(DBO ~ localidades, data = datos)
 # 
 
 # Responde a las siguientes preguntas:

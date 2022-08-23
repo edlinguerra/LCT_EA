@@ -1,7 +1,7 @@
 ---
 title: 'Estadística Aplicada. Lab2: Prueba de hipótesis simples'
 author: "Prof. Edlin Guerra Castro"
-date: "02/10/2020"
+date: "23/08/2021"
 output: pdf_document
 ---
 
@@ -11,15 +11,9 @@ library(tidyverse)
 
 # Lo que harán ahora es:
 
-1. Ingresar al espacio de trabajo de **R-Studio Cloud**
+1. Lea los pasos de cada ejercicio en esta actividad y ejecute los comandos que considere desde los archivos de comandos `lab2_e1.R` y `lab2_e2.R`. 
 
-2. Noten el *Laboratorio 2* en la lista de proyectos, e inicien el laboratorio (*START*)
-
-3. Una vez dentro del proyecto, cree un archivo de comandos y llámelo MisComandos.R; también abra el archivo MiReporte.Rmd en la carpeta **lab2**
-
-4. Lea los pasos de cada ejercicio en esta actividad y ejecute los comandos que considere desde su archivo de comandos comandos.R. 
-
-5. Las respuesta a las preguntas escríbalas en Mireporte.Rmd. Agregue los comandos definitivos que le permitieron responder la pregunta usando un bloque de código de **R** o **chunk** (lo puede generar con Ctrl + Alt + i). También debe incluir los gráficos en este documento, usando los comandos definitivos en el **chunk**.
+2. Las respuesta a las preguntas escríbalas en el Documento Google. Agregue capturas de pantalla sobre los comandos definitivos que le permitieron responder la pregunta. También debe incluir los gráficos en este documento.
 
 # Distribución t-student: Ejericio 1 - Una muestra
 
@@ -32,7 +26,7 @@ datos1 <- read_csv("datos1.csv")
 ```
 
 
-2. Calcula la media (con la función `mean`) y desviación estándar (con la función `sd`) de la DBO en la muestra y obtén un histograma (con la función `hist`) para ver su distribución. ¿Te parece que tienen una distribución normal? Confirma que los resultados que obtienes y el gráfico queden así así:
+2. Calcula la media (con la función `mean`) y desviación estándar (con la función `sd`) de la DBO en la muestra y obtén un histograma (con la función `hist`) para ver su distribución. ¿Te parece que tienen una distribución normal? Confirma que los resultados que obtienes y el gráfico queden así:
 
 ```{r, echo =  FALSE}
 hist(datos1$DBO, main = "histograma de la DBO", xlab = paste("DBO (", expression(O[2]), "ml/l/d)"), ylab =" Frecuencia")

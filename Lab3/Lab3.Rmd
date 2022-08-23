@@ -1,10 +1,11 @@
 ---
 title: 'Estadística Aplicada. Lab3: Regresión lineal y Correlación'
-author: "Dra. Maite Mascaro, FAcultad de Ciencias, UNAM"
-date: "15/11/2020"
+author: "Dr. Edlin Guerra Castro, ENES Mérida, UNAM"
+date: "26/10/2021"
 output:
-  word_document: default
+  pdf_document: default
   html_document: default
+  word_document: default
 ---
 
 # Parte 1
@@ -87,10 +88,13 @@ Para poner en práctica los conceptos sobre correlación introducidos en las cla
 
 6. Copia el siguiente código y describe cómo cambia la variable YY para cada unidad de cambio en XX.
 
+```{r, eval=FALSE}
 kk <- data.frame(xx=1:30,yy=round((c(1:30)+rnorm(30,3,1))^3,2))
 plot(kk$xx,kk$yy)
+```
 
-    a) ¿Es la fuerza de la asociación entre XX y YY similar para cualquier rango de valores de las variables?
+    a) ¿Es la fuerza de la asociación entre XX y YY similar para cualquier rango de valores 
+    de las variables?
     b) ¿Cómo describirías la asociación entre las dos variables para el intervalo de XX entre 0-15?
     c) ¿Cómo la describirías para el intervalo de XX entre 15-30?
 
