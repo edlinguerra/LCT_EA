@@ -1,7 +1,7 @@
 ---
 title: "Estadística descriptiva con R"
 author: "Prof. Edlin Guerra Castro"
-format: pdf
+format: html
 date: "`r format(Sys.time(), '%d/%m/%Y')`"
 editor: visual
 ---
@@ -97,7 +97,7 @@ sum(xx, na.rm = T)/length(xx)
 
 3.  Calcula la mediana de la masa corporal usando la función correspondiente.
 
-4.  Calcula la varianza y desviación estándar de la masa corporal usando el comando `var()`
+4.  Calcula la varianza de la masa corporal usando el comando `var()`
 
 5.  ¿Cuál es la diferencia entre estas dos fórmulas? ¿Representan lo mismo?
 
